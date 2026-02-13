@@ -1,4 +1,4 @@
-<img alt="GC" title="#gc" src=".github/diet.png" width="250px" />
+<img alt="diet" title="diet" src=".github/diet.png" width="100%" />
 
 # 🥗 Diet -- Mamba Fast Tracker
 
