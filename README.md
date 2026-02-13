@@ -1,4 +1,6 @@
+<div align="center"> 
 <img alt="diet" title="diet" src=".github/diet.png" width="400px" />
+</div>
 
 <img alt="diet" title="diet" src=".github/diet-app-readme.png" width="100%" />
 
