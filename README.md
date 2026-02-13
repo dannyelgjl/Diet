@@ -1,97 +1,181 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+<img alt="GC" title="#gc" src=".github/diet.png" width="250px" />
 
-# Getting Started
+# 🥗 Diet -- Mamba Fast Tracker
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Aplicativo mobile para controle de jejum intermitente e registro de
+calorias.
 
-## Step 1: Start Metro
+O app permite selecionar protocolos de jejum, iniciar timers com
+persistência em background, registrar refeições, acompanhar histórico e
+visualizar evolução semanal através de gráficos.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+---
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+# 🚀 Como rodar o projeto
 
-```sh
-# Using npm
-npm start
+## Pré-requisitos
 
-# OR using Yarn
-yarn start
+- Node \>= 18
+- Yarn ou npm
+- React Native CLI
+- Android Studio (Android)
+- Xcode (iOS -- macOS)
+
+---
+
+## 1️⃣ Instalar dependências
+
+```bash
+yarn
 ```
 
-## Step 2: Build and run your app
+ou
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+npm install
 ```
 
-### iOS
+---
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## 2️⃣ iOS (apenas macOS)
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```bash
+cd ios
+pod install
+cd ..
+npx react-native run-ios
 ```
 
-Then, and every time you update your native dependencies, run:
+---
 
-```sh
-bundle exec pod install
+## 3️⃣ Android
+
+```bash
+npx react-native run-android
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+---
 
-```sh
-# Using npm
-npm run ios
+# 🧠 Stack escolhida
 
-# OR using Yarn
-yarn ios
-```
+- React Native (sem Expo)
+- TypeScript
+- Zustand (gerenciamento de estado)
+- AsyncStorage (persistência local)
+- Styled-components
+- React Navigation (Native Stack)
+- react-native-gifted-charts (gráficos)
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+# 🏗 Arquitetura utilizada
 
-## Step 3: Modify your app
+Estrutura baseada em separação clara de responsabilidades:
 
-Now that you have successfully run the app, let's make changes!
+    src/
+     ├── components/
+     ├── screens/
+     │     ├── useContainer.ts
+     │     ├── styles.ts
+     │     └── index.tsx
+     ├── store/
+     ├── utils/
+     ├── routes/
+     └── styles/
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+### 📌 Padrões adotados
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+- Container Pattern (separação de lógica da UI)
+- Stores isoladas por domínio (fasting, meals, protocol, auth)
+- Persistência via Zustand + AsyncStorage
+- Helpers e formatações isoladas em utils
+- Styled-components para padronização visual
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+---
 
-## Congratulations! :tada:
+# ⚙️ Decisões técnicas
 
-You've successfully run and modified your React Native App. :partying_face:
+### 🔹 Zustand ao invés de Redux
 
-### Now what?
+Escolhido por simplicidade, menos boilerplate e melhor ergonomia.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+### 🔹 Persistência via AsyncStorage
 
-# Troubleshooting
+Leve e suficiente para o escopo do desafio.
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### 🔹 Timer baseado em timestamps
 
-# Learn More
+O timer calcula o tempo com base em:
 
-To learn more about React Native, take a look at the following resources:
+Date.now() - startedAt - totalPausedMs
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Garantindo continuidade em background e consistência após reinício do
+app.
+
+---
+
+# 📚 Bibliotecas utilizadas
+
+- zustand
+- @react-native-async-storage/async-storage
+- styled-components
+- @react-navigation/native
+- @react-navigation/native-stack
+- react-native-gifted-charts
+
+---
+
+# ⚖️ Trade-offs considerados
+
+- Não utilização de banco SQLite (AsyncStorage atende ao escopo)
+- Autenticação local simples em vez de Firebase Auth
+- Notificações locais simplificadas
+
+---
+
+# 🚀 O que melhoraria com mais tempo
+
+- Dark mode
+- Design system completo
+- Testes unitários (Jest)
+- Testes E2E (Detox)
+- Animações com Reanimated
+- Barra de progresso visual no timer
+- Internacionalização (i18n)
+- Melhor tratamento de erros
+- Acessibilidade aprimorada
+
+---
+
+# ⏱ Tempo gasto no desafio
+
+Aproximadamente 5--6 horas distribuídas entre:
+
+- Estruturação da arquitetura
+- Implementação do timer com persistência
+- Criação das stores
+- Telas principais
+- Refatoração para styled-components
+- Documentação final
+
+---
+
+# 📱 Funcionalidades implementadas
+
+- Login local com persistência de sessão
+- Seleção e criação de protocolos
+- Timer com pausa, retomada e encerramento
+- Persistência do estado do jejum
+- Registro de refeições
+- Cálculo diário de calorias e meta de jejum
+- Histórico de dias anteriores
+- Gráfico semanal de evolução
+
+---
+
+# 🏁 Conclusão
+
+O projeto foi desenvolvido com foco em organização, clareza
+arquitetural, performance e escalabilidade.
+
+Obrigado pela oportunidade 🚀
