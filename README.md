@@ -1,4 +1,6 @@
-<img alt="diet" title="diet" src=".github/diet.png" width="100%" />
+<img alt="diet" title="diet" src=".github/diet.png" width="300px" />
+
+<img alt="diet" title="diet" src=".github/diet-app-readme.png" width="100%" />
 
 # 🥗 Diet -- Mamba Fast Tracker
 
