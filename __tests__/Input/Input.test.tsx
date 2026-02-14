@@ -3,7 +3,7 @@ import { renderWithTheme, fireEvent } from '../../testUtils/renderWithTheme';
 import Input from '../../src/components/Input';
 
 describe('Input component', () => {
-  it('renderiza com value e placeholder', () => {
+  it('render with value and placeholder', () => {
     const { getByPlaceholderText } = renderWithTheme(
       <Input value="Teste" onChangeText={() => {}} placeholder="Digite algo" />,
     );
@@ -13,7 +13,7 @@ describe('Input component', () => {
     expect(input).toBeTruthy();
   });
 
-  it('chama onChangeText ao digitar', () => {
+  it('call onChangeText when type', () => {
     const onChangeText = jest.fn();
 
     const { getByPlaceholderText } = renderWithTheme(
@@ -27,7 +27,7 @@ describe('Input component', () => {
     expect(onChangeText).toHaveBeenCalledWith('Daniel');
   });
 
-  it('recebe secureTextEntry corretamente', () => {
+  it('receive secureTextEntry correctly', () => {
     const { getByPlaceholderText } = renderWithTheme(
       <Input
         value=""
@@ -42,7 +42,7 @@ describe('Input component', () => {
     expect(input.props.secureTextEntry).toBe(true);
   });
 
-  it('recebe keyboardType corretamente', () => {
+  it('receive keyboardType correctly', () => {
     const { getByPlaceholderText } = renderWithTheme(
       <Input
         value=""
