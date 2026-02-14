@@ -30,7 +30,7 @@ describe('format utils', () => {
   });
 
   describe('formatHMS', () => {
-    it('formats milliseconds to HH:MM:SS', () => {
+    it('formats milliseconds into HH:MM:SS', () => {
       const oneHour = 60 * 60 * 1000;
       const oneMinute = 60 * 1000;
       const oneSecond = 1000;
@@ -40,11 +40,11 @@ describe('format utils', () => {
       expect(result).toBe('01:01:01');
     });
 
-    it('returns 00:00:00 for 0', () => {
+    it('returns 00:00:00 when value is zero', () => {
       expect(formatHMS(0)).toBe('00:00:00');
     });
 
-    it('clamps negative to 00:00:00', () => {
+    it('clamps negative values to 00:00:00', () => {
       expect(formatHMS(-1000)).toBe('00:00:00');
     });
   });
@@ -57,7 +57,7 @@ describe('format utils', () => {
   });
 
   describe('dateKeyOf', () => {
-    it('returns date key in yyyy-mm-dd format', () => {
+    it('returns a date key in yyyy-mm-dd format', () => {
       const date = new Date('2026-02-13T10:30:00.000Z');
       const result = dateKeyOf(date);
 
@@ -66,12 +66,12 @@ describe('format utils', () => {
   });
 
   describe('elapsedMs / remainingMs', () => {
-    it('elapsedMs calcula tempo corrido sem pausas', () => {
+    it('calculates elapsed time without pauses', () => {
       const session: FastingSession = {
         id: '1',
         protocolId: 'p',
         targetDurationMs: 10_000,
-        startedAt: new Date(1000).toISOString(), // start=1000
+        startedAt: new Date(1000).toISOString(),
         pausedAt: null,
         totalPausedMs: 0,
         finishedAt: null,
@@ -79,33 +79,28 @@ describe('format utils', () => {
         notificationId: null,
       };
 
-      // now = 6000 => running=5000
       expect(elapsedMs(session, 6000)).toBe(5000);
       expect(remainingMs(session, 6000)).toBe(5000);
     });
 
-    it('elapsedMs desconta totalPausedMs e pausedAt (pausa ativa)', () => {
+    it('subtracts totalPausedMs and active pausedAt time', () => {
       const session: FastingSession = {
         id: '1',
         protocolId: 'p',
         targetDurationMs: 20_000,
-        startedAt: new Date(1000).toISOString(), // start=1000
-        pausedAt: new Date(4000).toISOString(), // paused at 4000
-        totalPausedMs: 2000, // pausas anteriores acumuladas
+        startedAt: new Date(1000).toISOString(),
+        pausedAt: new Date(4000).toISOString(),
+        totalPausedMs: 2000,
         finishedAt: null,
         status: 'paused',
         notificationId: null,
       };
 
-      // now = 9000:
-      // runningMs = 9000-1000 = 8000
-      // pausedExtra = 9000-4000 = 5000 (tempo desde que pausou agora)
-      // elapsed = 8000 - 2000 - 5000 = 1000
       expect(elapsedMs(session, 9000)).toBe(1000);
       expect(remainingMs(session, 9000)).toBe(19_000);
     });
 
-    it('elapsedMs nunca retorna negativo', () => {
+    it('never returns negative elapsed time', () => {
       const session: FastingSession = {
         id: '1',
         protocolId: 'p',
@@ -124,12 +119,10 @@ describe('format utils', () => {
   });
 
   describe('getWeeklySeries', () => {
-    it('retorna 7 pontos com calories somadas + label dd/mm', () => {
-      // fixa a data base do new Date() dentro do util
+    it('returns 7 points with summed calories and dd/mm labels', () => {
       jest.useFakeTimers();
       jest.setSystemTime(new Date('2026-02-13T12:00:00.000Z'));
 
-      // mock meals
       const getMeals = jest.fn((dateKey: string) => {
         if (dateKey === '2026-02-13')
           return [{ calories: 100 }, { calories: 200 }];
@@ -137,7 +130,6 @@ describe('format utils', () => {
         return [];
       });
 
-      // mock fasting
       const getTotalFastingMsForDate = jest.fn(() => 0);
 
       useMealsStore.getState.mockReturnValue({ getMeals });
@@ -147,7 +139,6 @@ describe('format utils', () => {
 
       expect(series).toHaveLength(7);
 
-      // primeiro ponto é 6 dias atrás (07/02) e último é hoje (13/02)
       expect(series[0].dateKey).toBe('2026-02-07');
       expect(series[0].label).toBe('07/02');
 
@@ -160,21 +151,19 @@ describe('format utils', () => {
       expect(prev.dateKey).toBe('2026-02-12');
       expect(prev.value).toBe(50);
 
-      // garante que chamou getMeals para cada um dos 7 dias
       expect(getMeals).toHaveBeenCalledTimes(7);
       expect(getTotalFastingMsForDate).toHaveBeenCalledTimes(7);
     });
 
-    it('retorna fasting em horas arredondado 1 casa decimal quando kind=fastingMs', () => {
+    it('returns fasting hours rounded to one decimal when kind=fastingMs', () => {
       jest.useFakeTimers();
       jest.setSystemTime(new Date('2026-02-13T12:00:00.000Z'));
 
       const getMeals = jest.fn(() => []);
 
-      // vamos controlar por dateKey pra provar o cálculo
       const fastingByDay: Record<string, number> = {
-        '2026-02-13': 90 * 60 * 1000, // 1.5h
-        '2026-02-12': 95 * 60 * 1000, // 1.5833h => 1.6 com 1 casa
+        '2026-02-13': 90 * 60 * 1000,
+        '2026-02-12': 95 * 60 * 1000,
       };
 
       const getTotalFastingMsForDate = jest.fn((dateKey: string) => {
