@@ -6,6 +6,7 @@ import * as S from './styles';
 import { Header } from '../../components/Header';
 import { useContainer } from './useContainer';
 import { IHistoryProps } from './types';
+import { ThemeToggle } from '../../components/ThemeToggle';
 
 export function HistoryScreen(props: IHistoryProps) {
   const { days, getSummary } = useContainer(props);
@@ -16,6 +17,7 @@ export function HistoryScreen(props: IHistoryProps) {
 
       <S.TitleContainer>
         <S.Title>Histórico</S.Title>
+        <ThemeToggle />
       </S.TitleContainer>
 
       {days.length === 0 ? (

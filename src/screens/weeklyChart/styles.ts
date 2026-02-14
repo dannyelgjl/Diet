@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Content = styled.View`
@@ -9,9 +10,18 @@ export const Content = styled.View`
   gap: 12px;
 `;
 
+export const TitleContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+`;
+
 export const Title = styled.Text`
   font-size: 22px;
   font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const ToggleRow = styled.View`
@@ -20,34 +30,39 @@ export const ToggleRow = styled.View`
 `;
 
 export const ToggleButton = styled.Pressable<{ $active: boolean }>`
-  padding-vertical: 10px;
-  padding-horizontal: 12px;
+  padding: 10px 14px;
   border-radius: 999px;
   border-width: 1px;
-  border-color: ${({ $active }) => ($active ? '#111' : '#ddd')};
+
+  border-color: ${({ $active, theme }) =>
+    $active ? theme.colors.secondary : theme.colors.border};
+
   background-color: ${({ $active, theme }) =>
-    $active ? '#111' : `${theme.colors.primaryWhite}`};
+    $active ? theme.colors.secondary : theme.colors.backgroundCard};
 `;
 
 export const ToggleText = styled.Text<{ $active: boolean }>`
   font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
+
   color: ${({ $active, theme }) =>
-    $active ? `${theme.colors.primaryWhite}` : '#111'};
+    $active ? theme.colors.primary : theme.colors.secondary};
 `;
 
 export const ChartCard = styled.View`
   padding: 14px;
   border-radius: 14px;
   border-width: 1px;
-  border-color: #eee;
+  border-color: ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.backgroundCard};
 `;
 
 export const ChartTitle = styled.Text`
   font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
+  color: ${({ theme }) => theme.colors.secondary};
   margin-bottom: 10px;
 `;
 
 export const Footer = styled.Text`
-  font-weight: ${({ theme }) => theme.fonts.Roboto_400Regular};
-  color: #666;
+  color: ${({ theme }) => theme.colors.mutedText};
+  font-family: ${({ theme }) => theme.fonts.Roboto_400Regular};
 `;

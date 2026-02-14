@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View<{ $topInset: number }>`
   width: 100%;
   padding: ${({ $topInset }) => $topInset}px 22px 22px 22px;
-  background-color: ${({ theme }) => theme.colors.primaryBlack};
+  background-color: ${({ theme }) => theme.colors.backgroundCard};
 `;
 
 export const Row = styled.View`
@@ -20,10 +20,8 @@ export const Spacer = styled.View`
 
 export const Title = styled.Text`
   font-size: 18px;
-  color: ${({ theme }) => theme.colors.primaryWhite};
-  /* max-width: 65%; */
+  color: ${({ theme }) => theme.colors.textDefault};
   text-align: center;
-
   font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
 `;
 
@@ -33,7 +31,7 @@ export const LeftButton = styled.Pressable`
 
 export const LeftButtonText = styled.Text`
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.primaryWhite};
+  color: ${({ theme }) => theme.colors.textDefault};
   font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
 `;
 
@@ -43,6 +41,6 @@ export const RightButton = styled.Pressable`
 `;
 
 export const RightButtonText = styled.Text`
-  color: ${({ theme }) => theme.colors.primaryWhite};
+  color: ${({ theme }) => theme.colors.textDefault};
   font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
 `;

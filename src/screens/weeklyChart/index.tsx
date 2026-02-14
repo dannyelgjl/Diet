@@ -4,16 +4,21 @@ import { Header } from '../../components/Header';
 import * as S from './styles';
 import { IWeeklyChart } from './types';
 import { useContainer } from './useContainer';
+import { ThemeToggle } from '../../components/ThemeToggle';
 
 export function WeeklyChartScreen(props: IWeeklyChart) {
-  const { chartData, mode, setMode } = useContainer(props);
+  const { axisColor, data, mode, setMode, labelColor } = useContainer(props);
 
   return (
     <S.Container>
       <Header title="Gráficos" showBack />
 
       <S.Content>
-        <S.Title>Evolução semanal</S.Title>
+        <S.TitleContainer>
+          <S.Title>Evolução semanal</S.Title>
+
+          <ThemeToggle />
+        </S.TitleContainer>
 
         <S.ToggleRow>
           <S.ToggleButton
@@ -41,13 +46,18 @@ export function WeeklyChartScreen(props: IWeeklyChart) {
           </S.ChartTitle>
 
           <BarChart
-            data={chartData}
+            data={data}
             barWidth={22}
             spacing={14}
             roundedTop
             yAxisThickness={0}
             xAxisThickness={1}
+            xAxisColor={axisColor}
+            rulesType="solid"
+            rulesColor={axisColor}
             noOfSections={4}
+            xAxisLabelTextStyle={{ color: labelColor }}
+            yAxisTextStyle={{ color: labelColor }}
             isAnimated
           />
         </S.ChartCard>

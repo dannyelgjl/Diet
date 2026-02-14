@@ -1,20 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { render, RenderOptions } from '@testing-library/react-native';
-import { theme } from '../src/styles/theme/theme';
-
-//
-// const theme = {
-//   fonts: {
-//     Roboto_700Bold: 'Roboto-Bold',
-//     Roboto_500Medium: 'Roboto-Medium',
-//     Roboto_400Regular: 'Roboto-Regular',
-//   },
-//   colors: {
-//     background: '#fff',
-//     text: '#111',
-//   },
-// };
+import { lightTheme } from '../src/styles/theme/light';
 
 type Options = Omit<RenderOptions, 'wrapper'> & {
   themeOverride?: any;
@@ -25,7 +12,9 @@ export function renderWithTheme(
   { themeOverride, ...options }: Options = {},
 ) {
   const Wrapper = ({ children }: { children: React.ReactNode }) => (
-    <ThemeProvider theme={themeOverride ?? theme}>{children}</ThemeProvider>
+    <ThemeProvider theme={themeOverride ?? lightTheme}>
+      {children}
+    </ThemeProvider>
   );
 
   return render(ui, { wrapper: Wrapper, ...options });

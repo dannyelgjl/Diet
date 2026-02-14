@@ -7,6 +7,8 @@ import { useContainer } from './useContainer';
 import Input from '../../components/Input';
 import Modal from '../../components/Modal';
 import { formatDateKeyToBR } from '../../utils/format';
+import { ThemeToggle } from '../../components/ThemeToggle';
+import Button from '../../components/Button';
 
 export function MealsScreen(props: IMealsProps) {
   const {
@@ -32,9 +34,14 @@ export function MealsScreen(props: IMealsProps) {
 
   return (
     <S.Container>
-      <Header title="Histórico" showBack />
+      <Header title="Refeições" showBack />
       <S.TitleContainer>
-        <S.Title>Refeições ({formatDateKeyToBR(todayKey)})</S.Title>
+        <S.Wrapper>
+          <S.Title>Refeições ({formatDateKeyToBR(todayKey)})</S.Title>
+
+          <ThemeToggle />
+        </S.Wrapper>
+
         <S.Subtitle>Total do dia: {total} kcal</S.Subtitle>
       </S.TitleContainer>
 
@@ -54,9 +61,7 @@ export function MealsScreen(props: IMealsProps) {
           keyboardType="numeric"
         />
 
-        <S.PrimaryButton onPress={onAdd}>
-          <S.PrimaryButtonText>Salvar</S.PrimaryButtonText>
-        </S.PrimaryButton>
+        <Button onPress={onAdd} title="Salvar" />
       </S.Card>
 
       <S.List

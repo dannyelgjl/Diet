@@ -1,5 +1,6 @@
 import * as S from './styles';
 import { IInputProps } from './types';
+import { useTheme } from 'styled-components/native';
 
 const Input = ({
   onChangeText,
@@ -9,6 +10,8 @@ const Input = ({
   placeholder,
   secureTextEntry,
 }: IInputProps) => {
+  const theme = useTheme();
+
   return (
     <S.Container
       value={value}
@@ -16,7 +19,7 @@ const Input = ({
       autoCapitalize={autoCapitalize}
       keyboardType={keyboardType}
       placeholder={placeholder}
-      placeholderTextColor="#999"
+      placeholderTextColor={theme.colors.mutedText}
       secureTextEntry={secureTextEntry}
     />
   );

@@ -6,7 +6,7 @@ export const Container = styled.View`
   border-width: 1px;
   border-color: #eee;
 
-  background-color: ${({ theme }) => theme.colors.primaryWhite};
+  background-color: ${({ theme }) => theme.colors.backgroundCard};
 
   gap: 8px;
 `;
@@ -14,6 +14,8 @@ export const Container = styled.View`
 export const Title = styled.Text`
   font-size: 18px;
   font-weight: 900;
+
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const ProtocolInfo = styled.Text`
@@ -31,17 +33,19 @@ export const Subtitle = styled.Text`
 export const Timer = styled.Text`
   font-size: 36px;
   font-weight: 900;
+
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const PrimaryButton = styled.Pressable`
   padding: 14px;
   border-radius: 10px;
-  background-color: #111;
+  background-color: ${({ theme }) => theme.colors.secondary};
   align-items: center;
 `;
 
 export const PrimaryButtonText = styled.Text`
-  color: ${({ theme }) => theme.colors.primaryWhite};
+  color: ${({ theme }) => theme.colors.primary};
 
   font-weight: 800;
 `;
@@ -50,11 +54,13 @@ export const OutlineButton = styled.Pressable`
   padding: 14px;
   border-radius: 10px;
   border-width: 1px;
-  border-color: #111;
+  border-color: ${({ theme }) => theme.colors.secondary};
   align-items: center;
 `;
 
 export const OutlineButtonText = styled.Text`
   color: #111;
   font-weight: 800;
+
+  color: ${({ theme }) => theme.colors.secondary};
 `;

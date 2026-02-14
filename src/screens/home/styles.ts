@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.ScrollView`
   flex: 1;
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Content = styled.View`
@@ -14,9 +15,18 @@ export const HeaderBlock = styled.View`
   gap: 4px;
 `;
 
+export const TitleContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+`;
+
 export const DashboardTitle = styled.Text`
   font-size: 22px;
   font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const DashboardSubtitle = styled.Text`
@@ -25,15 +35,17 @@ export const DashboardSubtitle = styled.Text`
 `;
 
 export const ActionsBlock = styled.View`
-  background-color: ${({ theme }) => theme.colors.primaryWhite};
+  background-color: ${({ theme }) => theme.colors.backgroundCard};
   gap: 10px;
   padding: 16px;
   border-radius: 14px;
+  border: 1px solid #eeeeee;
 `;
 
 export const ActionsTitle = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const Row = styled.View`
@@ -53,6 +65,8 @@ export const QuickButton = styled.Pressable`
 export const QuickButtonTitle = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
+
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const QuickButtonSubtitle = styled.Text`

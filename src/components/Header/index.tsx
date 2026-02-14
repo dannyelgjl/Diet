@@ -20,7 +20,7 @@ export function Header({
 
   return (
     <S.Container $topInset={topInset}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="default" />
 
       <S.Row>
         {showBack ? (

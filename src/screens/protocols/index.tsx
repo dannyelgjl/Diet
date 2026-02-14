@@ -4,6 +4,7 @@ import * as S from './styles';
 import { IProtocolsProps } from './types';
 import { useContainer } from './useContainer';
 import Input from '../../components/Input';
+import { ThemeToggle } from '../../components/ThemeToggle';
 
 const Protocols = (props: IProtocolsProps) => {
   const {
@@ -25,7 +26,10 @@ const Protocols = (props: IProtocolsProps) => {
       <Header title="Protocolo" showBack />
 
       <S.Content>
-        <S.Title>Protocolos de Jejum</S.Title>
+        <S.TitleContainer>
+          <S.Title>Protocolos de Jejum</S.Title>
+          <ThemeToggle />
+        </S.TitleContainer>
 
         <S.SelectedCard>
           <S.SelectedContent>

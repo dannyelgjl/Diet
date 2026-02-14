@@ -7,6 +7,7 @@ import { DailySummaryCard } from '../../components/DailySummaryCard';
 import { Header } from '../../components/Header';
 
 import * as S from './styles';
+import { ThemeToggle } from '../../components/ThemeToggle';
 
 const Home = (props: IHomeProps) => {
   const { navigation, handleLogout } = useContainer(props);
@@ -17,7 +18,11 @@ const Home = (props: IHomeProps) => {
 
       <S.Content>
         <S.HeaderBlock>
-          <S.DashboardTitle>Dashboard</S.DashboardTitle>
+          <S.TitleContainer>
+            <S.DashboardTitle>Dashboard</S.DashboardTitle>
+            <ThemeToggle />
+          </S.TitleContainer>
+
           <S.DashboardSubtitle>
             Acompanhe seu jejum e calorias do dia.
           </S.DashboardSubtitle>
