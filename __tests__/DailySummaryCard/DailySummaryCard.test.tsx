@@ -2,12 +2,10 @@ import React from 'react';
 import { DailySummaryCard } from '../../src/components/DailySummaryCard';
 import { renderWithTheme } from '../../testUtils/renderWithTheme';
 
-// ✅ mock do container (controla a saída do hook)
 jest.mock('../../src/components/DailySummaryCard/useContainer', () => ({
   useContainer: jest.fn(),
 }));
 
-// ✅ mock dos formatadores (evita teste quebrar por formatação)
 jest.mock('../../src/utils/format', () => ({
   formatDateKeyToBR: jest.fn(),
   formatHMS: jest.fn(),
@@ -25,7 +23,7 @@ describe('DailySummaryCard', () => {
     jest.clearAllMocks();
   });
 
-  it('renderiza resumo com status "within"', () => {
+  it('render resume with status "within"', () => {
     mockUseContainer.mockReturnValue({
       summary: {
         dateKey: '2026-02-13',
@@ -48,12 +46,11 @@ describe('DailySummaryCard', () => {
 
     expect(getByText('Dentro da meta ✅')).toBeTruthy();
 
-    // garante que formatadores foram chamados com os valores corretos
     expect(mockFormatDateKeyToBR).toHaveBeenCalledWith('2026-02-13');
     expect(mockFormatHMS).toHaveBeenCalledWith(16 * 60 * 60 * 1000);
   });
 
-  it('renderiza resumo com status "out"', () => {
+  it('render resume with status "out"', () => {
     mockUseContainer.mockReturnValue({
       summary: {
         dateKey: '2026-02-13',
