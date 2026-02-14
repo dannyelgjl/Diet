@@ -26,7 +26,7 @@ visualizar evolução semanal através de gráficos.
 
 # 🤖 Link do APK
 
-https://drive.google.com/file/d/1BvYdFOlUJfuYGn3_JdkcIrlUiZFT7zYd/view?usp=sharing
+https://drive.google.com/file/d/1juAVmasu3_V1KZCcNg3H7aTifpW0TC2-/view?usp=sharing
 
 ---
 
