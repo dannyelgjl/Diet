@@ -6,7 +6,6 @@ describe('useMealsStore', () => {
     jest.useFakeTimers();
     jest.setSystemTime(new Date('2026-02-13T10:00:00.000Z'));
 
-    // ✅ reset sem apagar actions
     useMealsStore.setState({ mealsByDate: {} });
 
     jest.clearAllMocks();
@@ -16,7 +15,7 @@ describe('useMealsStore', () => {
     jest.useRealTimers();
   });
 
-  it('addMeal(): adiciona refeição no dia atual, normaliza nome e arredonda calorias', () => {
+  it('addMeal(): adds a meal for today, trims the name and floors calories', () => {
     act(() => {
       useMealsStore.getState().addMeal('  Almoço  ', 650.9);
     });
@@ -26,13 +25,13 @@ describe('useMealsStore', () => {
 
     expect(list).toHaveLength(1);
     expect(list[0].dateKey).toBe(dateKey);
-    expect(list[0].name).toBe('Almoço'); // trim
-    expect(list[0].calories).toBe(650); // floor
+    expect(list[0].name).toBe('Almoço');
+    expect(list[0].calories).toBe(650);
     expect(list[0].createdAt).toBeTruthy();
     expect(list[0].id).toMatch(/^m_/);
   });
 
-  it('addMeal(): permite informar uma data específica (date param)', () => {
+  it('addMeal(): supports passing a specific date (date param)', () => {
     act(() => {
       useMealsStore
         .getState()
@@ -44,13 +43,13 @@ describe('useMealsStore', () => {
     expect(list[0].dateKey).toBe('2026-02-10');
   });
 
-  it('addMeal(): falha se nome vazio', () => {
+  it('addMeal(): throws when name is empty', () => {
     expect(() => useMealsStore.getState().addMeal('   ', 100)).toThrow(
       'Nome é obrigatório',
     );
   });
 
-  it('addMeal(): falha se calorias inválidas (<= 0, NaN)', () => {
+  it('addMeal(): throws when calories are invalid (<= 0, NaN)', () => {
     expect(() => useMealsStore.getState().addMeal('Almoço', 0)).toThrow(
       'Calorias inválidas',
     );
@@ -59,12 +58,12 @@ describe('useMealsStore', () => {
     ).toThrow('Calorias inválidas');
   });
 
-  it('getTodayKey(): retorna a chave do dia atual (YYYY-MM-DD)', () => {
+  it('getTodayKey(): returns today key in YYYY-MM-DD format', () => {
     const key = useMealsStore.getState().getTodayKey();
     expect(key).toBe('2026-02-13');
   });
 
-  it('editMeal(): edita name e calories do item (por dateKey explícito)', () => {
+  it('editMeal(): updates name and calories (with explicit dateKey)', () => {
     act(() => {
       useMealsStore.getState().addMeal('Almoço', 650);
     });
@@ -83,7 +82,7 @@ describe('useMealsStore', () => {
     expect(edited.calories).toBe(901);
   });
 
-  it('editMeal(): se não passar dateKey, usa o dia atual', () => {
+  it('editMeal(): uses today when dateKey is not provided', () => {
     act(() => {
       useMealsStore.getState().addMeal('Café', 100);
     });
@@ -99,7 +98,7 @@ describe('useMealsStore', () => {
     expect(edited.calories).toBe(200);
   });
 
-  it('editMeal(): se id não existir, não altera a lista', () => {
+  it('editMeal(): does not change the list when id does not exist', () => {
     act(() => {
       useMealsStore.getState().addMeal('Almoço', 650);
     });
@@ -115,7 +114,7 @@ describe('useMealsStore', () => {
     expect(after).toEqual(before);
   });
 
-  it('deleteMeal(): remove a refeição (por dateKey explícito)', () => {
+  it('deleteMeal(): removes a meal (with explicit dateKey)', () => {
     act(() => {
       useMealsStore.getState().addMeal('Almoço', 650);
       useMealsStore.getState().addMeal('Jantar', 800);
@@ -125,7 +124,7 @@ describe('useMealsStore', () => {
     const list = useMealsStore.getState().getMeals(today);
     expect(list).toHaveLength(2);
 
-    const toDelete = list[0].id; // lembra que add insere no começo
+    const toDelete = list[0].id;
 
     act(() => {
       useMealsStore.getState().deleteMeal(toDelete, today);
@@ -136,7 +135,7 @@ describe('useMealsStore', () => {
     expect(after.find(m => m.id === toDelete)).toBeUndefined();
   });
 
-  it('deleteMeal(): se não passar dateKey, usa o dia atual', () => {
+  it('deleteMeal(): uses today when dateKey is not provided', () => {
     act(() => {
       useMealsStore.getState().addMeal('Almoço', 650);
     });
