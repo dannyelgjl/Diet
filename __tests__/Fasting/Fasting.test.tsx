@@ -38,7 +38,7 @@ describe('FastingTimerCard', () => {
     };
   }
 
-  it('renderiza título e botão de iniciar quando canStartNew=true', () => {
+  it('render title and button to start when canStartNew=true', () => {
     const container = baseContainer({
       canStartNew: true,
       statusLabel: 'Nenhum jejum em andamento',
@@ -55,7 +55,7 @@ describe('FastingTimerCard', () => {
     expect(container.start).toHaveBeenCalledTimes(1);
   });
 
-  it('mostra protocolo ativo quando existir', () => {
+  it('show protocol active when display', () => {
     const container = baseContainer({
       activeProtocol: {
         id: 'p1',
@@ -74,7 +74,7 @@ describe('FastingTimerCard', () => {
     expect(getByText('16:8 • Jejum 16h / Janela 8h')).toBeTruthy();
   });
 
-  it('quando em andamento (running), exibe timer/decorrido e botão Pausar + Encerrar', () => {
+  it('when in progress (running), show timer/elapsed and button Pause + Finish', () => {
     const container = baseContainer({
       canStartNew: false,
       current: { status: 'running' },
@@ -87,7 +87,7 @@ describe('FastingTimerCard', () => {
     const { getByText } = renderWithTheme((<FastingTimerCard />) as any);
 
     expect(getByText('Status: running')).toBeTruthy();
-    expect(getByText('HMS(123)')).toBeTruthy(); // Timer
+    expect(getByText('HMS(123)')).toBeTruthy();
     expect(getByText('Decorrido: HMS(456)')).toBeTruthy();
 
     fireEvent.press(getByText('Pausar'));
@@ -100,7 +100,7 @@ describe('FastingTimerCard', () => {
     expect(mockFormatHMS).toHaveBeenCalledWith(456);
   });
 
-  it('quando pausado (paused), exibe botão Retomar + Encerrar', () => {
+  it('when pause (paused), show button Back + Finish', () => {
     const container = baseContainer({
       canStartNew: false,
       current: { status: 'paused' },
