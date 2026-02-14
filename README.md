@@ -157,7 +157,6 @@ app.
 - Design system completo
 - Testes E2E (Detox)
 - Animações com Reanimated
-- Barra de progresso visual no timer
 - Internacionalização (i18n)
 - Acessibilidade aprimorada
 
