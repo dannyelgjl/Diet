@@ -19,7 +19,7 @@ visualizar evolução semanal através de gráficos.
 
 ## Pré-requisitos
 
-- Node \>= 18
+- Node \>= 20
 - Yarn ou npm
 - React Native CLI
 - Android Studio (Android)
@@ -69,6 +69,12 @@ npx react-native run-android
 - Styled-components
 - React Navigation (Native Stack)
 - react-native-gifted-charts (gráficos)
+
+---
+
+# 🧪 Testes unitários
+
+<img alt="diet" title="diet" src=".github/test.png" width="100%" />
 
 ---
 
@@ -141,12 +147,10 @@ app.
 
 - Dark mode
 - Design system completo
-- Testes unitários (Jest)
 - Testes E2E (Detox)
 - Animações com Reanimated
 - Barra de progresso visual no timer
 - Internacionalização (i18n)
-- Melhor tratamento de erros
 - Acessibilidade aprimorada
 
 ---
