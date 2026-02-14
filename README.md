@@ -15,6 +15,13 @@ visualizar evolução semanal através de gráficos.
 
 ---
 
+# 🔑 Credenciais
+
+- E-mail: email-teste@teste.com
+- Password: 123456
+
+---
+
 # 🚀 Como rodar o projeto
 
 ## Pré-requisitos
