@@ -35,7 +35,7 @@ describe('notifications service', () => {
     jest.clearAllMocks();
   });
 
-  it('requestNotificationPermission() chama requestPermission', async () => {
+  it('requestNotificationPermission() call requestPermission', async () => {
     const notifications = loadNotificationsModule();
     const notifee = getNotifeeMock();
 
@@ -44,7 +44,7 @@ describe('notifications service', () => {
     expect(notifee.requestPermission).toHaveBeenCalledTimes(1);
   });
 
-  it('notifyFastingStarted() cria channel e exibe notificação', async () => {
+  it('notifyFastingStarted() create channel and show notification', async () => {
     const notifications = loadNotificationsModule();
     const notifee = getNotifeeMock();
 
@@ -70,7 +70,7 @@ describe('notifications service', () => {
     );
   });
 
-  it('scheduleFastingFinished() cria trigger notification com timestamp', async () => {
+  it('scheduleFastingFinished() create trigger notification with timestamp', async () => {
     const notifications = loadNotificationsModule();
     const notifee = getNotifeeMock();
 
@@ -96,7 +96,7 @@ describe('notifications service', () => {
     );
   });
 
-  it('cancelScheduled() chama cancelNotification e não quebra em erro', async () => {
+  it('cancelScheduled() call cancelNotification and dont broken in erro', async () => {
     const notifications = loadNotificationsModule();
     const notifee = getNotifeeMock();
 
@@ -107,7 +107,7 @@ describe('notifications service', () => {
     await expect(notifications.cancelScheduled('xyz')).resolves.toBeUndefined();
   });
 
-  it('notifyFastingFinishedNow() exibe notificação', async () => {
+  it('notifyFastingFinishedNow() show notification', async () => {
     const notifications = loadNotificationsModule();
     const notifee = getNotifeeMock();
 
@@ -126,7 +126,7 @@ describe('notifications service', () => {
     );
   });
 
-  it('ensureChannel cache: cria o channel só 1 vez', async () => {
+  it('ensureChannel cache: create the channel only 1 time', async () => {
     const notifications = loadNotificationsModule();
     const notifee = getNotifeeMock();
 
