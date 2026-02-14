@@ -18,6 +18,8 @@ export function FastingTimerCard(props: IFastingProps) {
     start,
     startLabel,
     statusLabel,
+    progressPct,
+    progress,
   } = useContainer(props);
 
   return (
@@ -42,6 +44,17 @@ export function FastingTimerCard(props: IFastingProps) {
       ) : (
         <>
           <S.Subtitle>Status: {current?.status}</S.Subtitle>
+
+          <S.ProgressWrapper>
+            <S.ProgressHeader>
+              <S.ProgressLabel>Progress</S.ProgressLabel>
+              <S.ProgressValue>{progressPct}%</S.ProgressValue>
+            </S.ProgressHeader>
+
+            <S.ProgressTrack>
+              <S.ProgressFill $progress={progress} />
+            </S.ProgressTrack>
+          </S.ProgressWrapper>
 
           <S.Timer>{formatHMS(remaining)}</S.Timer>
 

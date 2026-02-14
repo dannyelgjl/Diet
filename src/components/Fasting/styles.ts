@@ -64,3 +64,42 @@ export const OutlineButtonText = styled.Text`
 
   color: ${({ theme }) => theme.colors.secondary};
 `;
+
+export const ProgressWrapper = styled.View`
+  margin-top: 10px;
+  margin-bottom: 6px;
+  gap: 8px;
+`;
+
+export const ProgressHeader = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ProgressLabel = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
+  color: ${({ theme }) => theme.colors.secondary};
+  font-size: 12px;
+`;
+
+export const ProgressValue = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.Roboto_700Bold};
+  color: ${({ theme }) => theme.colors.mutedText};
+  font-size: 12px;
+`;
+
+export const ProgressTrack = styled.View`
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background-color: ${({ theme }) => theme.colors.border};
+  overflow: hidden;
+`;
+
+export const ProgressFill = styled.View<{ $progress: number }>`
+  height: 100%;
+  width: ${({ $progress }) => `${Math.round($progress * 100)}%`};
+  border-radius: 999px;
+  background-color: ${({ theme }) => theme.colors.secondary};
+`;

@@ -1,6 +1,6 @@
 import { useFastingStore } from '../../store/fasting/fasting.store';
 import { useProtocolStore } from '../../store/protocol/protocol.store';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { IFastingProps } from './types';
 
 export const useContainer = (_: IFastingProps) => {
@@ -16,6 +16,19 @@ export const useContainer = (_: IFastingProps) => {
   const protocols = useProtocolStore(state => state.protocols);
   const [tick, setTick] = useState(0);
 
+  const nowMs = Date.now();
+  const elapsed = getElapsed(nowMs);
+  const remaining = getRemaining(nowMs);
+
+  const progress = useMemo(() => {
+    const total = current?.targetDurationMs ?? 0;
+    if (!total) return 0;
+    const p = elapsed / total;
+    return Math.max(0, Math.min(1, p));
+  }, [elapsed, current?.targetDurationMs]);
+
+  const progressPct = Math.round(progress * 100);
+
   useEffect(() => {
     const id = setInterval(() => setTick(t => t + 1), 1000);
     return () => clearInterval(id);
@@ -24,10 +37,6 @@ export const useContainer = (_: IFastingProps) => {
   useEffect(() => {
     syncAutoFinish();
   }, [tick, syncAutoFinish]);
-
-  const nowMs = Date.now();
-  const elapsed = getElapsed(nowMs);
-  const remaining = getRemaining(nowMs);
 
   const activeProtocol = current
     ? protocols.find(p => p.id === current.protocolId)
@@ -56,5 +65,7 @@ export const useContainer = (_: IFastingProps) => {
     pause,
     resume,
     finish,
+    progressPct,
+    progress,
   };
 };
