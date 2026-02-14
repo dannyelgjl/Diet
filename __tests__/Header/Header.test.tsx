@@ -25,7 +25,7 @@ describe('Header', () => {
     };
   }
 
-  it('renderiza o título corretamente', () => {
+  it('render the title correctly', () => {
     mockUseContainer.mockReturnValue(baseContainer());
 
     const { getByText } = renderWithTheme(<Header title="Home" />);
@@ -33,7 +33,7 @@ describe('Header', () => {
     expect(getByText('Home')).toBeTruthy();
   });
 
-  it('mostra botão Voltar quando showBack=true', () => {
+  it('show button back when showBack=true', () => {
     const container = baseContainer();
     mockUseContainer.mockReturnValue(container);
 
@@ -46,7 +46,7 @@ describe('Header', () => {
     expect(container.navigation.goBack).toHaveBeenCalledTimes(1);
   });
 
-  it('não mostra botão Voltar quando showBack=false', () => {
+  it('dont show button back when showBack=false', () => {
     mockUseContainer.mockReturnValue(baseContainer());
 
     const { queryByText } = renderWithTheme(
@@ -56,7 +56,7 @@ describe('Header', () => {
     expect(queryByText('Voltar')).toBeNull();
   });
 
-  it('renderiza botão da direita quando rightLabel existir', () => {
+  it('render button of right when rightLabel exist', () => {
     const onRightPress = jest.fn();
     mockUseContainer.mockReturnValue(baseContainer());
 
@@ -71,7 +71,7 @@ describe('Header', () => {
     expect(onRightPress).toHaveBeenCalledTimes(1);
   });
 
-  it('não renderiza botão da direita quando rightLabel não existir', () => {
+  it('dont render button of right when rightLabel dont exist', () => {
     mockUseContainer.mockReturnValue(baseContainer());
 
     const { queryByText } = renderWithTheme(<Header title="Tela" />);
