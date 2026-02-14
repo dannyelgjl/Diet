@@ -190,7 +190,7 @@ Aproximadamente 5--6 horas distribuídas entre:
 - Registro de refeições
 - Cálculo diário de calorias e meta de jejum
 - Histórico de dias anteriores
-- Detalhes do Histórico
+- Detalhe do Histórico
 - Gráfico semanal de evolução
 - Dark Mode
 
