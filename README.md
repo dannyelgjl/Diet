@@ -1,8 +1,10 @@
 <div align="center"> 
-<img alt="diet" title="diet" src=".github/diet.png" width="400px" />
+<img alt="diet" title="diet" src=".github/diet-dark.png" width="400px" />
 </div>
 
 <img alt="diet" title="diet" src=".github/diet-app-readme.png" width="100%" />
+
+<img alt="diet" title="diet" src=".github/diet-app-dark-readme.png" width="100%" />
 
 # 🥗 Diet -- Mamba Fast Tracker
 
@@ -152,7 +154,6 @@ app.
 
 # 🚀 O que melhoraria com mais tempo
 
-- Dark mode
 - Design system completo
 - Testes E2E (Detox)
 - Animações com Reanimated
@@ -185,6 +186,7 @@ Aproximadamente 5--6 horas distribuídas entre:
 - Cálculo diário de calorias e meta de jejum
 - Histórico de dias anteriores
 - Gráfico semanal de evolução
+- Dark Mode
 
 ---
 
