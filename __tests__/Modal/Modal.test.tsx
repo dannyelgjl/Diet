@@ -3,7 +3,7 @@ import Modal from '../../src/components/Modal';
 import { renderWithTheme, fireEvent } from '../../testUtils/renderWithTheme';
 
 describe('Modal', () => {
-  it('renderiza quando visible', () => {
+  it('render when visible', () => {
     const onSave = jest.fn();
     const onClose = jest.fn();
 
