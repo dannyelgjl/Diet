@@ -6,13 +6,13 @@ describe('useAuthStore (local auth)', () => {
     useAuthStore.setState({ isLoggedIn: false, email: null });
   });
 
-  it('inicia deslogado', () => {
+  it('starts logged out', () => {
     const state = useAuthStore.getState();
     expect(state.isLoggedIn).toBe(false);
     expect(state.email).toBeNull();
   });
 
-  it('faz login com credenciais corretas (trim + lowercase)', async () => {
+  it('logs in with correct credentials (trim + lowercase)', async () => {
     await act(async () => {
       await useAuthStore
         .getState()
@@ -24,7 +24,7 @@ describe('useAuthStore (local auth)', () => {
     expect(state.email).toBe('email-teste@teste.com');
   });
 
-  it('falha login com email errado', async () => {
+  it('fails to log in with wrong email', async () => {
     await expect(
       useAuthStore.getState().login('x@x.com', '123456'),
     ).rejects.toThrow('Email ou senha inválidos');
@@ -34,7 +34,7 @@ describe('useAuthStore (local auth)', () => {
     expect(state.email).toBeNull();
   });
 
-  it('falha login com senha errada', async () => {
+  it('fails to log in with wrong password', async () => {
     await expect(
       useAuthStore.getState().login('email-teste@teste.com', '999999'),
     ).rejects.toThrow('Email ou senha inválidos');
@@ -44,7 +44,7 @@ describe('useAuthStore (local auth)', () => {
     expect(state.email).toBeNull();
   });
 
-  it('logout limpa a sessão', async () => {
+  it('clears the session on logout', async () => {
     await act(async () => {
       await useAuthStore.getState().login('email-teste@teste.com', '123456');
     });
