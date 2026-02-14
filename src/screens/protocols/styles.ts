@@ -65,16 +65,8 @@ export const Separator = styled.View`
   height: 10px;
 `;
 
-export const List = styled(FlatList)`
-  /* não prenda altura fixa se puder.
-     Se quiser limitar, use max-height aqui mesmo */
-`;
+export const List = styled(FlatList)``;
 
-/**
- * Card do protocolo
- * - ativo: background = secondary (preto no light / branco no dark)
- * - inativo: background = backgroundCard
- */
 export const ProtocolCard = styled.Pressable<{ $active: boolean }>`
   padding: 14px;
   border-radius: 14px;

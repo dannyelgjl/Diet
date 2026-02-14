@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
-import type { Meal } from '../../store/meals/meals.store';
+import { Meal } from '../../store/meals/types';
 
 export const Container = styled.View`
   flex: 1;

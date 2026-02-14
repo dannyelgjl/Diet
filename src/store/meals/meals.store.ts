@@ -1,29 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-
-export type Meal = {
-  id: string;
-  dateKey: string;
-  name: string;
-  calories: number;
-  createdAt: string;
-};
-
-type MealsState = {
-  mealsByDate: Record<string, Meal[]>;
-
-  addMeal(name: string, calories: number, date?: Date): void;
-  editMeal(
-    mealId: string,
-    patch: Partial<Pick<Meal, 'name' | 'calories'>>,
-    dateKey?: string,
-  ): void;
-  deleteMeal(mealId: string, dateKey?: string): void;
-
-  getMeals(dateKey: string): Meal[];
-  getTodayKey(): string;
-};
+import { Meal, MealsState } from './types';
 
 function uid(prefix = 'm_') {
   return `${prefix}${Math.random().toString(16).slice(2)}_${Date.now().toString(

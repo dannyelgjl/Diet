@@ -1,13 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-
-type AuthState = {
-  isLoggedIn: boolean;
-  email: string | null;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-};
+import { AuthState } from './types';
 
 const FIXED_EMAIL = 'email-teste@teste.com';
 const FIXED_PASSWORD = '123456';

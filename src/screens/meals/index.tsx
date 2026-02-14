@@ -1,5 +1,4 @@
 import React from 'react';
-import { Meal } from '../../store/meals/meals.store';
 import * as S from './styles';
 import { Header } from '../../components/Header';
 import { IMealsProps } from './types';
@@ -9,6 +8,7 @@ import Modal from '../../components/Modal';
 import { formatDateKeyToBR } from '../../utils/format';
 import { ThemeToggle } from '../../components/ThemeToggle';
 import Button from '../../components/Button';
+import { Meal } from '../../store/meals/types';
 
 export function MealsScreen(props: IMealsProps) {
   const {

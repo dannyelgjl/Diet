@@ -1,24 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-
-export type FastingProtocol = {
-  id: string;
-  name: string;
-  fastingHours: number;
-  eatingHours: number;
-  isCustom: boolean;
-};
-
-type ProtocolState = {
-  protocols: FastingProtocol[];
-  selectedProtocolId: string;
-
-  seedDefaults(): void;
-  selectProtocol(id: string): void;
-  createCustomProtocol(fastingHours: number, eatingHours: number): void;
-  deleteCustomProtocol(id: string): void;
-};
+import { FastingProtocol, ProtocolState } from './types';
 
 const DEFAULTS: FastingProtocol[] = [
   {

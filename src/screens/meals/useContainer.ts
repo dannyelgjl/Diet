@@ -1,7 +1,8 @@
 import { Alert } from 'react-native';
 import { IMealsProps } from './types';
-import { Meal, useMealsStore } from '../../store/meals/meals.store';
+import { useMealsStore } from '../../store/meals/meals.store';
 import { useMemo, useState } from 'react';
+import { Meal } from '../../store/meals/types';
 
 function formatTime(iso: string) {
   const d = new Date(iso);

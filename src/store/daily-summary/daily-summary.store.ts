@@ -3,17 +3,7 @@ import { useProtocolStore } from '../protocol/protocol.store';
 import { useFastingStore } from '../fasting/fasting.store';
 import { useMealsStore } from '../meals/meals.store';
 import { dateKeyOf } from '../../utils/format';
-
-export type DailySummary = {
-  dateKey: string;
-  totalCalories: number;
-  totalFastingMs: number;
-  status: 'within' | 'out';
-};
-
-type DailySummaryState = {
-  getSummary(date?: Date): DailySummary;
-};
+import { DailySummaryState } from './types';
 
 export const useDailySummaryStore = create<DailySummaryState>(() => ({
   getSummary(date = new Date()) {

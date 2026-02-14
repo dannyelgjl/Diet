@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const ModalOverlay = styled.View`
   flex: 1;
-  /* overlay pode ficar fixo mesmo */
+
   background-color: rgba(0, 0, 0, 0.55);
   justify-content: center;
   padding: 16px;
