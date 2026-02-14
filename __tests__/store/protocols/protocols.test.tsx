@@ -11,7 +11,7 @@ describe('useProtocolStore', () => {
     jest.clearAllMocks();
   });
 
-  it('seedDefaults(): popula protocolos padrão apenas se vazio', () => {
+  it('seedDefaults(): populates default protocols only when store is empty', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
@@ -33,7 +33,7 @@ describe('useProtocolStore', () => {
     expect(useProtocolStore.getState().protocols).toHaveLength(3);
   });
 
-  it('selectProtocol(): altera protocolo selecionado', () => {
+  it('selectProtocol(): updates the selected protocol', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
@@ -45,7 +45,7 @@ describe('useProtocolStore', () => {
     expect(useProtocolStore.getState().selectedProtocolId).toBe('p_18_6');
   });
 
-  it('selectProtocol(): falha se protocolo não existir', () => {
+  it('selectProtocol(): throws if protocol does not exist', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
@@ -55,7 +55,7 @@ describe('useProtocolStore', () => {
     ).toThrow('Protocolo não encontrado');
   });
 
-  it('createCustomProtocol(): cria protocolo válido e seleciona automaticamente', () => {
+  it('createCustomProtocol(): creates a valid custom protocol and auto-selects it', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
@@ -72,7 +72,7 @@ describe('useProtocolStore', () => {
     expect(state.selectedProtocolId).toBe(state.protocols[0].id);
   });
 
-  it('createCustomProtocol(): aplica clamp 1–23', () => {
+  it('createCustomProtocol(): clamps values between 1 and 23', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
@@ -87,7 +87,7 @@ describe('useProtocolStore', () => {
     expect(created.eatingHours).toBe(23);
   });
 
-  it('createCustomProtocol(): falha se soma != 24', () => {
+  it('createCustomProtocol(): throws when fasting + eating does not equal 24', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
@@ -97,7 +97,7 @@ describe('useProtocolStore', () => {
     ).toThrow('Jejum + janela deve somar 24h');
   });
 
-  it('deleteCustomProtocol(): remove custom e volta para 16:8 se era selecionado', () => {
+  it('deleteCustomProtocol(): removes custom protocol and resets selection to 16:8 if it was selected', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
@@ -118,7 +118,7 @@ describe('useProtocolStore', () => {
     expect(state.selectedProtocolId).toBe('p_16_8');
   });
 
-  it('deleteCustomProtocol(): não altera seleção se deletar outro custom', () => {
+  it('deleteCustomProtocol(): keeps selection if deleting a different custom protocol', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
@@ -142,7 +142,7 @@ describe('useProtocolStore', () => {
     expect(useProtocolStore.getState().selectedProtocolId).toBe(secondCustom);
   });
 
-  it('deleteCustomProtocol(): falha ao tentar excluir protocolo padrão', () => {
+  it('deleteCustomProtocol(): throws when trying to delete a default protocol', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
@@ -152,7 +152,7 @@ describe('useProtocolStore', () => {
     ).toThrow('Não pode excluir protocolo padrão');
   });
 
-  it('deleteCustomProtocol(): não faz nada se id não existir', () => {
+  it('deleteCustomProtocol(): does nothing when id does not exist', () => {
     act(() => {
       useProtocolStore.getState().seedDefaults();
     });
