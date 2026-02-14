@@ -50,7 +50,7 @@ describe('useFastingStore', () => {
     jest.useRealTimers();
   });
 
-  it('start(): cria sessão running, salva em sessionsByDate e agenda notificação', async () => {
+  it('start(): creates a running session, saves it in sessionsByDate and schedules a notification', async () => {
     await act(async () => {
       await useFastingStore.getState().start();
     });
@@ -77,7 +77,7 @@ describe('useFastingStore', () => {
     );
   });
 
-  it('start(): não permite iniciar se já existe jejum running', async () => {
+  it('start(): does not allow starting when there is already a running fasting session', async () => {
     await act(async () => {
       await useFastingStore.getState().start();
     });
@@ -87,7 +87,7 @@ describe('useFastingStore', () => {
     );
   });
 
-  it('pause(): cancela notificação agendada e muda status para paused', async () => {
+  it('pause(): cancels the scheduled notification and changes status to paused', async () => {
     await act(async () => {
       await useFastingStore.getState().start();
     });
@@ -105,7 +105,7 @@ describe('useFastingStore', () => {
     expect(state.current?.pausedAt).toBeTruthy();
   });
 
-  it('resume(): soma tempo pausado e reagenda notificação com o tempo restante', async () => {
+  it('resume(): adds paused time and reschedules notification with remaining time', async () => {
     await act(async () => {
       await useFastingStore.getState().start();
     });
@@ -128,7 +128,7 @@ describe('useFastingStore', () => {
     expect(after.pausedAt).toBeNull();
     expect(after.totalPausedMs).toBeGreaterThanOrEqual(30 * 60 * 1000);
 
-    expect(scheduleFastingFinished).toHaveBeenCalledTimes(2); // 1 do start, 1 do resume
+    expect(scheduleFastingFinished).toHaveBeenCalledTimes(2);
 
     const lastCall = (scheduleFastingFinished as jest.Mock).mock.calls[
       (scheduleFastingFinished as jest.Mock).mock.calls.length - 1
@@ -140,7 +140,7 @@ describe('useFastingStore', () => {
     expect(endAtMs).toBeGreaterThan(Date.now());
   });
 
-  it('finish(): cancela notificação, move current pra null, marca sessão finished e notifica agora', async () => {
+  it('finish(): cancels notification, clears current, marks session as finished and notifies immediately', async () => {
     await act(async () => {
       await useFastingStore.getState().start();
     });
@@ -164,7 +164,7 @@ describe('useFastingStore', () => {
     expect(notifyFastingFinishedNow).toHaveBeenCalledTimes(1);
   });
 
-  it('syncAutoFinish(): se remaining <= 0, marca finished e limpa current', async () => {
+  it('syncAutoFinish(): when remaining <= 0, marks session as finished and clears current', async () => {
     await act(async () => {
       await useFastingStore.getState().start();
     });
@@ -184,8 +184,7 @@ describe('useFastingStore', () => {
     expect(state.sessionsByDate[dateKey][0].status).toBe('finished');
   });
 
-  it('getElapsed(): quando current é finished com finishedAt, calcula usando finishedAt', async () => {
-    // sessão começou 10:00 e terminou 11:00
+  it('getElapsed(): when current is finished with finishedAt, calculates using finishedAt', () => {
     const startedAt = new Date('2026-02-13T10:00:00.000Z').toISOString();
     const finishedAt = new Date('2026-02-13T11:00:00.000Z').toISOString();
 
@@ -203,15 +202,14 @@ describe('useFastingStore', () => {
       },
     } as any);
 
-    // mesmo passando nowMs "errado", deve usar finishedAt
     const elapsed = useFastingStore
       .getState()
       .getElapsed(new Date('2026-02-13T20:00:00.000Z').getTime());
 
-    expect(elapsed).toBe(60 * 60 * 1000); // 1h
+    expect(elapsed).toBe(60 * 60 * 1000);
   });
 
-  it('getRemaining(): quando current é finished, retorna 0', () => {
+  it('getRemaining(): when current is finished, returns 0', () => {
     useFastingStore.setState({
       current: {
         id: 'fs2',
@@ -230,10 +228,9 @@ describe('useFastingStore', () => {
     expect(remaining).toBe(0);
   });
 
-  it('getTotalFastingMsForDate(): soma finished + running/paused e ignora outros status', () => {
-    // fixa Date.now() pra ficar determinístico no branch running/paused
+  it('getTotalFastingMsForDate(): sums finished and running/paused sessions and ignores other statuses', () => {
     jest.useFakeTimers();
-    jest.setSystemTime(new Date('2026-02-13T12:00:00.000Z')); // now
+    jest.setSystemTime(new Date('2026-02-13T12:00:00.000Z'));
 
     const dateKey = '2026-02-13';
 
@@ -244,7 +241,7 @@ describe('useFastingStore', () => {
       startedAt: new Date('2026-02-13T08:00:00.000Z').toISOString(),
       pausedAt: null,
       totalPausedMs: 0,
-      finishedAt: new Date('2026-02-13T10:00:00.000Z').toISOString(), // 2h
+      finishedAt: new Date('2026-02-13T10:00:00.000Z').toISOString(),
       status: 'finished',
       notificationId: 'n1',
     };
@@ -261,7 +258,6 @@ describe('useFastingStore', () => {
       notificationId: 'n2',
     };
 
-    // "outro status" que não entra nos ifs do reduce (cobre o return sum)
     const idleSession = {
       id: 's_idle',
       protocolId: 'p16',
@@ -282,9 +278,6 @@ describe('useFastingStore', () => {
 
     const total = useFastingStore.getState().getTotalFastingMsForDate(dateKey);
 
-    // finished: 08->10 = 2h = 7200000
-    // running: 11->12 = 1h = 3600000
-    // idle: ignorado
     expect(total).toBe(3 * 60 * 60 * 1000);
   });
 });
