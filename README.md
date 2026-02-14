@@ -21,7 +21,7 @@ visualizar evolução semanal através de gráficos.
 
 - Node \>= 20
 - Yarn ou npm
-- React Native CLI
+- React Native
 - Android Studio (Android)
 - Xcode (iOS -- macOS)
 

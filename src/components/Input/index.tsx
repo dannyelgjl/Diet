@@ -7,7 +7,6 @@ const Input = ({
   autoCapitalize,
   keyboardType,
   placeholder,
-
   secureTextEntry,
 }: IInputProps) => {
   return (

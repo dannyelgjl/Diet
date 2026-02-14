@@ -6,8 +6,8 @@ import { Alert } from 'react-native';
 export const useContainer = (_: ILoginProps) => {
   const login = useAuthStore(state => state.login);
 
-  const [email, setEmail] = useState('email-teste@teste.com');
-  const [password, setPassword] = useState('123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const onLogin = async () => {
