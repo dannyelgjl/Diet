@@ -10,6 +10,7 @@ import { HistoryScreen } from '../screens/history';
 
 import { WeeklyChartScreen } from '../screens/weeklyChart';
 import { useAuthStore } from '../store/auth/auth.simple.store';
+import { HistoryDetailScreen } from '../screens/historyDetail';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ const Routes = () => {
           <Screen name="Meals" component={MealsScreen} />
           <Screen name="History" component={HistoryScreen} />
           <Screen name="WeeklyChart" component={WeeklyChartScreen} />
+          <Screen name="HistoryDetail" component={HistoryDetailScreen} />
         </>
       )}
     </Navigator>

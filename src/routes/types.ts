@@ -9,4 +9,5 @@ export interface RootStackParamList extends ParamListBase {
   History: undefined;
   DayDetail: { dateKey: string };
   WeeklyChart: undefined;
+  HistoryDetail: { dateKey: string };
 }

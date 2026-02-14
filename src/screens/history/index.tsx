@@ -9,7 +9,7 @@ import { IHistoryProps } from './types';
 import { ThemeToggle } from '../../components/ThemeToggle';
 
 export function HistoryScreen(props: IHistoryProps) {
-  const { days, getSummary } = useContainer(props);
+  const { days, getSummary, navigation } = useContainer(props);
 
   return (
     <S.Container>
@@ -33,7 +33,11 @@ export function HistoryScreen(props: IHistoryProps) {
             const summary = getSummary(new Date(dateKey + 'T12:00:00'));
 
             return (
-              <S.DayCard onPress={() => {}}>
+              <S.DayCard
+                onPress={() =>
+                  navigation.navigate('HistoryDetail', { dateKey })
+                }
+              >
                 <S.DayTitle>{formatDateKeyToBR(dateKey)}</S.DayTitle>
                 <S.RowText>Calorias: {summary.totalCalories} kcal</S.RowText>
                 <S.RowText>
