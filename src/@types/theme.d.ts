@@ -1,6 +1,6 @@
 import 'styled-components/native';
-import { TTheme } from '../styles/theme/theme';
+import type { Theme } from '../styles/theme/types';
 
 declare module 'styled-components/native' {
-  export interface DefaultTheme extends TTheme {}
+  export interface DefaultTheme extends Theme {}
 }
